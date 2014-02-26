@@ -10,12 +10,15 @@ var server = http.createServer(function (request, response) {
   
   // Supply the text content you'll send back in the body
   // of the HTTP response
-  response.end('Hello Frontend Master!\n');
+  response.end('Howdy Frontend Master!\n');
 });
  
 // Have the HTTP server start listening for HTTP requests
 // on port 3000 on your local machine
-server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
+var port = process.env.PORT || 3000,
+    host = process.env.IP || "0.0.0.0";
+
+server.listen(port, host, function(){
   // Once your server is started, this function is called
-  console.log('Server running at http://localhost:3000/');
+  console.log('Server running at http://' + host + ":" + port);
 });
