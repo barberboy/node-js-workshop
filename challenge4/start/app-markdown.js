@@ -1,7 +1,8 @@
 var express = require('express'), 
     http = require('http'), 
     path = require('path'),
-    Post = require('./Post');
+    Post = require('./Post'),
+    marked = require('marked');
 
 var app = express();
 
@@ -51,7 +52,7 @@ app.post('/create', function(request, response) {
     // http://mongoosejs.com/docs/models.html
     var post = new Post({
         title: request.body.title,
-        content: request.body.content
+        content: marked(request.body.content)
     });
 
     // TODO: Save the model

@@ -6,26 +6,43 @@
     <script>
         var socket = io.connect();
         socket.on('chat', function (data) {
-            $('textarea').val($('textarea').val()+data.message+'\n');
+            $('textarea').val($('textarea').val()+data.name+': '+data.message+'\n');
         });
 
         // Handle UI
         $(function() {
-            $('button').on('click', function() {
-                console.log($('input').val());
+            $('.nickname button').on('click', function() {
+                socket.emit('nickname', {
+                    name: $('.nickname input').val()
+                })
+            });
+            
+            $('.message button').on('click', function() {
+                var message = $('input.message');
+//                var name = $('input.name');
+                
+                // console.log(message.val());
                 socket.emit('chat', {
-                    message:$('input').val()
+//                    name: name.val(),
+                    message: message.val()
                 });
+                
+                message.val('');
+                message.focus();
             });
         });
     </script>
 </head>
 <body>
     <h1>Simple Chat</h1>
+    <div class="nickname">
+        <label>Nickname <input class="name" type="text" placeholder="Your nickname" size="12"></label><button>Set Nickname</button>
+    </div>
     <textarea style="height:300px;width:500px;"></textarea>
-    <p>
-        <input type="text"/>
-        <button>Send Chat Message</button>
+    <p class="message">
+        <!--<label>Nickname <input class="name" type="text" placeholder="Your nickname" size="12"></label>-->
+        <label>Message <input type="text" class="message" placeholder="Enter your message." /></label>
+        <button>Send</button>
     </p>
 </body>
 </html>

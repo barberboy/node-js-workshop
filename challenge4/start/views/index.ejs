@@ -3,6 +3,12 @@
 <head>
     <title>My Little Bloggie</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <style>
+        article {
+            padding: 2em 0;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
 </head>
 <body>
     <div class="container" style="margin-top:10px;">
@@ -18,12 +24,10 @@
         <div class="row">
             <div class="span12">
                 <% posts.forEach(function(post) { %>
-                    <div>
+                    <article>
                         <h1><%= post.title %></h1>
-                        <p>
-                            <%= post.content %>
-                        </p>
-                    </div>
+                        <div class="content"><%- post.content %></p>
+                    </article>
                 <% }) %>
             </div>
         </div>

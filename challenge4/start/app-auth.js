@@ -1,9 +1,16 @@
 var express = require('express'), 
     http = require('http'), 
     path = require('path'),
-    Post = require('./Post');
+    Post = require('./Post'),
+    marked = require('marked');
 
 var app = express();
+
+var auth = express.basicAuth(function(user, pass){
+    console.log("Checking authentication");
+    return 'admin' == user && 'admin' == pass;
+});
+
 
 app.configure(function() {
     app.set('port', process.env.PORT || 3000);
@@ -14,6 +21,7 @@ app.configure(function() {
     app.use(express.logger('dev'));
     app.use(express.bodyParser());
     app.use(express.methodOverride());
+    app.use(auth);
     app.use(app.router);
     app.use(express.static(path.join(__dirname, 'public')));
 });
@@ -40,6 +48,25 @@ app.get('/', function(request, response) {
     });
 });
 
+// Render our home page with all blog posts
+app.get('/posts.json', function(request, response) {
+
+    // TODO: How do we get a list of all model objects using a mongoose model?
+    // http://mongoosejs.com/docs/queries.html
+    // http://mongoosejs.com/docs/api.html#query_Query-find
+    Post.find(function(err, posts) {
+        if (err) {
+            response.send(500, 'There was an error - tough luck.');
+        }
+        else {
+            response.send({
+                success: true,
+                posts: posts
+            });
+        }
+    });
+});
+
 // Render a form to enter a new post
 app.get('/new', function(request, response) {
     response.render('new', {});
@@ -51,7 +78,7 @@ app.post('/create', function(request, response) {
     // http://mongoosejs.com/docs/models.html
     var post = new Post({
         title: request.body.title,
-        content: request.body.content
+        content: marked(request.body.content)
     });
 
     // TODO: Save the model

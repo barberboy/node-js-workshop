@@ -1,0 +1,11 @@
+{
+  "name": "socket-example",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "~3.2.0",
+    "socket.io": "~0.9.14"
+  },
+  "author": ""
+}

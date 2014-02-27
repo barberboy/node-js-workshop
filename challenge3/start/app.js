@@ -9,6 +9,7 @@ var app = express();
 // Configure an express app
 app.configure(function(){
     app.set('port', process.env.PORT || 3000);
+    app.set('ip', process.env.IP || '0.0.0.0');
     app.set('views', __dirname + '/views');
     app.set('view engine', 'ejs');
     app.use(express.favicon());
@@ -32,21 +33,30 @@ var sessionInfo = {
 // Create session middleware
 var session = function(request, response, next) {
     // TODO: How do we store session data on the request?  How do we continue with the request chain?
+    request.sessionInfo = sessionInfo;
+    
+    // http://expressjs.com/api.html#app.use
+    next();
 };
 
 // Handle GET request to root URL
 app.get('/', session, function(request, response) {
     // TODO: How do we render the "index.ejs" template from the /views directory?
+    // http://expressjs.com/api.html#res.locals
+    response.render('index', request.sessionInfo);
 });
 
-app.post('/login', function(request, response) {\
+app.post('/login', function(request, response) {
     // Update our session state with the undername submitted by the form
     sessionInfo.name = request.body.username;
 
     // TODO: How do we send the user back to "/" after the request?
-    response.CHANGEME('/');
+    // http://expressjs.com/api.html#res.redirect
+    response.redirect('/');
 });
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port') + " - visit http://localhost:3000/");
+http.createServer(app).listen(app.get('port'), app.get('ip'), function(){
+    console.log(
+        "Express server listening on port " + app.get('port') +
+        " - visit http://" + app.get('ip') +":" + app.get('port'));
 });
