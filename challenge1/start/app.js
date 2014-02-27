@@ -27,6 +27,7 @@ http.createServer(function(request, response) {
 
         // TODO: How do we serialize responseData to a JSON string?
         // http://ecma-international.org/ecma-262/5.1/#sec-15.12.3
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
         response.end(JSON.stringify(responseData));
     });
 
