@@ -8,6 +8,11 @@ This is also being edited on the Cloud9 IDE at
 <http://c9.io/barberboy/node-js-workshop> and the application URL is
 <https://node-js-workshop-c9-barberboy.c9.io>.
 
+The completed code is also available on Github at
+<https://github.com/barberboy/node-js-workshop>. You are welcome to file
+[issues](https://github.com/barberboy/node-js-workshop/issues) for bugs that you
+find!
+
 # node-workshop
 
 A beginner-level intro to node.js.  For presentation slides, check out the gh-pages branch.
@@ -15,12 +20,21 @@ A beginner-level intro to node.js.  For presentation slides, check out the gh-pa
 ## Challenges
 
 ### Challenge One: Standard Libraries
-Using node's standard libraries `http` and `fs` and built-in JSON support, read in a comma-seprated file of key-value pairs, and create an HTTP server which returns the file's contents as JSON.
+Using node's standard libraries `http` and `fs` and built-in JSON support, read 
+in a comma-seprated file of key-value pairs, and create an HTTP server which 
+returns the file's contents as JSON.
 
 ### Challenge Two: CommonJS Modules
-Create two new CommonJS modules in a project directory.  One module should expose an instantiable object called "Person". Your constructor should accept a JavaScript object literal, which will have properties to assign to the Person. Every person should have a property `knowsKungFu` set to `false`.  The constructor should be able to override this. To accomplish this, install `underscore` from npm and use it's `_.extend` function in your constructor.
+Create two new CommonJS modules in a project directory.  One module should 
+expose an instantiable object called "Person". Your constructor should accept a 
+JavaScript object literal, which will have properties to assign to the Person. 
+Every person should have a property `knowsKungFu` set to `false`.  The 
+constructor should be able to override this. To accomplish this, install 
+`underscore` from npm and use it's `_.extend` function in your constructor.
 
-Your second custom module will be a custom logger, which will have an `info` logging function.  This function should print out the current date and time, as well as the given log message.
+Your second custom module will be a custom logger, which will have an `info` 
+logging function.  This function should print out the current date and time, as 
+well as the given log message.
 
 ### Challenge Three: Express and Request Routing
 Create an Express application which responds to an HTTP `GET` request, and renders an HTML page using the EJS template engine. This HTML page should contain a form, which issues a `POST` action to log in a user, then redirect back to the same page.
