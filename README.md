@@ -57,4 +57,3 @@ Create a simple chat room application using socket.io.  Starting with the simple
 Install the browserify package from npm globally - `npm install -g browserify`. The file "browser.js" contains node.js-style code that uses both core node and third party modules from npm.  Use the browserify command line utility to create a browser-ready version of `browser.js` called `commandline.js`, which should reside in the "public" directory of the project.
 
 You will also want to check out the npm module `browserify-middleware`.  This module works with express to always serve the most recent version of your browserified source, and includes source maps so you can view and debug individual files.  In `app.js`, figure out how to use browserify-middleware to serve up a file called `middleware.js` to the browser, which contains the browserified contents of `browser.js`.
-dd>>>>>>> 34d2b089d569ee4a1e4792686847914df15c24bf
